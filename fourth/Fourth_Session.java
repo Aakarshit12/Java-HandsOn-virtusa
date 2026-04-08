@@ -77,14 +77,14 @@ public class Fourth_Session {
         List<student> rawList = recordBox.fetchAll();
 
         // grouping
-        Map<String, List<student>> deptBucket = new HashMap<>();
+        Map<String, List<student>> Department = new HashMap<>();
         for (student st : rawList) {
             if (st.getDeptName() == null)
                 continue;
-            if (!deptBucket.containsKey(st.getDeptName())) {
-                deptBucket.put(st.getDeptName(), new ArrayList<>());
+            if (!Department.containsKey(st.getDeptName())) {
+                Department.put(st.getDeptName(), new ArrayList<>());
             }
-            deptBucket.get(st.getDeptName()).add(st);
+            Department.get(st.getDeptName()).add(st);
         }
 
         // subjects
@@ -111,10 +111,10 @@ public class Fourth_Session {
 
         // Department wise average
         Map<String, Double> avgMap = new HashMap<>();
-        for (String key : deptBucket.keySet()) {
+        for (String key : Department.keySet()) {
             double sum = 0;
             int count = 0;
-            for (student st : deptBucket.get(key)) {
+            for (student st : Department.get(key)) {
                 sum += st.getTotalMarks();
                 count++;
             }
@@ -136,8 +136,8 @@ public class Fourth_Session {
         StringBuilder rep = new StringBuilder();
         rep.append("Report Data\n");
 
-        for (String key : deptBucket.keySet()) {
-            rep.append("Dept " + key + " size " + deptBucket.get(key).size() + "\n");
+        for (String key : Department.keySet()) {
+            rep.append("Dept " + key + " size " + Department.get(key).size() + "\n");
         }
 
         for (student st : topperList) {
